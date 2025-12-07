@@ -21,7 +21,7 @@ const pages = {
           </div>
         </div>
       </div>
-      <footer class="small">Remplace le logo en haut (images/logo_ressourcerie.png). Modifie les textes dans le fichier HTML directement.</footer>
+      
     `
   },
   about: {
