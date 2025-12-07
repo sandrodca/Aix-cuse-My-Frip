@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ressourcerie — IUT d'Aix</title>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  
+</head>
+<body>
+  <div class="app" id="app">
+    
+    <!-- =========================
+         SIDEBAR
+         ========================= -->
+    <aside class="sidebar" id="sidebar" aria-expanded="false">
+
+      <!-- Bouton home/logo -->
+      <button class="home-btn" id="homeBtn" aria-label="Revenir à l'accueil" title="Accueil">
+        <!-- remplace par assets/icons/home.png -->
+        <img src="Images/home.png" alt="Accueil" class="icon-img">
+      </button>
+
+      <!-- Toggle menu -->
+      <div class="toggle" id="toggle" role="button" aria-pressed="false" aria-label="Ouvrir le menu" title="Ouvrir / Fermer">
+        <!-- remplace par assets/icons/toggle.png (flèche) -->
+        <img src="Images/sidebar.png" alt="Toggle menu" class="icon-img">
+      </div>
+
+      <!-- Menu principal -->
+      <nav class="menu" aria-label="Navigation principale">
+        <div class="menu-inner" id="menuInner">
+
+          <a href="#" data-page="about">
+            <span class="icon"><img src="Images/info.png" class="icon-img" alt="" aria-hidden="true"></span>
+            <span class="label">Qui sommes-nous</span>
+          </a>
+
+          <a href="#" data-page="hours">
+            <span class="icon"><img src="Images/horraires.png" class="icon-img" alt="" aria-hidden="true"></span>
+            <span class="label">Horaires</span>
+          </a>
+
+          <a href="#" data-page="news">
+            <span class="icon"><img src="Images/news.png" class="icon-img" alt="" aria-hidden="true"></span>
+            <span class="label">Actualités</span>
+          </a>
+
+          <a href="#" data-page="contact">
+            <span class="icon"><img src="Images/contact.png" class="icon-img" alt="" aria-hidden="true"></span>
+            <span class="label">Contact</span>
+          </a>
+
+          <a href="#" data-page="partners">
+            <span class="icon"><img src="Images/partenaires.png" class="icon-img" alt="" aria-hidden="true"></span>
+            <span class="label">Nos partenaires</span>
+          </a>
+
+          <a href="#" data-page="legal">
+            <span class="icon"><img src="Images/legal.png" class="icon-img" alt="" aria-hidden="true"></span>
+            <span class="label">Legal</span>
+          </a>
+
+          <a href="#" data-page="find">
+            <span class="icon"><img src="Images/localisation.png" class="icon-img" alt="" aria-hidden="true"></span>
+            <span class="label">Nous trouver</span>
+          </a>
+
+        </div>
+      </nav>
+      
+      <a href="https://www.univ-amu.fr/" target="_blank" rel="noopener noreferrer">
+        
+        <div class="logo-container"> <img src="Amulogo.png" alt="Logo Université"></div>
+      
+      </a>
+          <div class="sidebar-title">Ressourcerie</div>
+      
+           
+      
+    </aside>
+
+    <!-- =========================
+         CONTENU PRINCIPAL
+         ========================= -->
+    <main class="content-wrap">
+      <section class="page" id="page">
+
+        <div class="card-container">
+          <div class="card" id="card">
+
+            <header class="page-head">
+              <h2 id="pageTitle">Accueil</h2>
+              <div class="subtitle" id="pageSubtitle">Bienvenue à la ressourcerie de l'IUT d'Aix</div>
+            </header>
+
+            <div class="page-body" id="pageBody">
+                 
+                </div>
+
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </main>
+
+  </div>
+
+  <!-- =========================
+       SCRIPT JS
+       ========================= -->
+  <script src="script.js"></script>
+</body>
+</html>
