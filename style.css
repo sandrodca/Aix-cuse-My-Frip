@@ -1,0 +1,298 @@
+/* =========================
+   Variables globales
+   ========================= */
+:root {
+  --bg-color: white;
+  --sidebar-bg: #faf8ef;
+  --card-bg: #faf8ef;
+  --text-color: #111111;
+  --muted-color: #6b6b6b;
+  --accent-color: #0b6b6b;
+  --shadow: 0 8px 24px rgba(15,20,25,0.08);
+  --radius: 14px;
+  --max-width: 1100px;
+}
+
+/* Reset & base */
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body { background-color: var(--bg-color); color: var(--text-color); }
+a { color: inherit; text-decoration: none; }
+
+/* Layout principal */
+.app { display: flex; min-height: 100vh; align-items: stretch; position: relative; overflow: hidden; }
+
+/* Sidebar */
+.sidebar {
+  width: 72px; /* état fermé par défaut */
+  background-color: var(--sidebar-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 8px;
+  gap: 18px;
+  z-index: 40;
+  transition: width 0.35s ease, background-color 0.4s ease;
+}
+.sidebar.expanded { width: 260px; }
+
+/* Home button & toggle */
+.home-btn, .toggle {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: grid; place-items: center;
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  border: none;
+}
+
+/* Rotate toggle icon when expanded */
+.sidebar.expanded .toggle img { transform: rotate(180deg); transition: transform 0.35s ease; }
+
+/* Menu */
+.menu { width: 100%; height: calc(100% - 170px); display: flex; flex-direction: column; gap: 8px; padding: 0 8px; overflow: visible; }
+.menu-inner { display: flex; flex-direction: column; gap: 6px; transition: all .28s cubic-bezier(.2,.9,.2,1); }
+
+/* Links */
+.menu-inner a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-color);
+  transition: background .22s ease, color .22s ease, transform .18s ease;
+  line-height:1.1;
+}
+.menu-inner a:hover { background: rgba(11,107,107,0.06); color: var(--accent-color); }
+.menu-inner a.active { background: rgba(11,107,107,0.08); color: var(--accent-color); transform: translateX(2px); }
+
+/* Icon images */
+.icon, .icon-img { width: 50px; height: 50px; display:flex; align-items:center; justify-content:center; }
+.icon-img { object-fit: contain; pointer-events: none; } /* images non-cliquables séparément */
+
+/* Sidebar closed: hide labels but keep icons visible and centered */
+.sidebar:not(.expanded) .label { display: none; }
+.sidebar:not(.expanded) .menu-inner a { justify-content: center; padding: 10px 6px; text-align: center; }
+
+/* Sidebar expanded: normal alignment (icon + label) */
+.sidebar.expanded .menu-inner a { justify-content: flex-start; text-align: left; }
+
+/* Force widths to avoid layout jump */
+.sidebar { width: 72px !important; }
+.sidebar.expanded { width: 260px !important; }
+
+/* Contenu principal */
+.content-wrap { flex: 1; display: flex; align-items: center; justify-content: center; padding: 36px; }
+.page { width: 100%; max-width: var(--max-width); padding: 48px; position: relative; }
+.card { background-color: var(--card-bg); padding: 36px; border-radius: 16px; box-shadow: var(--shadow); backdrop-filter: blur(4px); }
+
+/* Page header */
+.page-head { display: flex; align-items: center; gap: 18px; }
+.page-head h2 { margin: 0; font-family: 'Playfair Display', serif; font-size: 34px; }
+.page-head .subtitle { color: var(--muted-color); font-weight: 600; }
+
+/* Page body */
+.page-body { margin-top: 18px; line-height: 1.6; color: var(--text-color); }
+.lead { font-size: 18px; color: var(--muted-color); margin-bottom: 12px; }
+
+/* Grid & horaires */
+.grid { display: grid; grid-template-columns: 1fr 360px; gap: 28px; }
+.hours { background: linear-gradient(180deg,#fff,#fbfbfb); padding: 18px; border-radius: 12px; }
+
+/* Footer small */
+footer.small { margin-top: 26px; color: var(--muted-color); font-size: 13px; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .sidebar { position: fixed; left: 10px; top: 10px; width: 56px; }
+  .sidebar.expanded { width: 260px; }
+  .content-wrap { padding: 18px; }
+  .grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .page-head h2 { font-size: 24px; }
+  .page { padding: 20px; }
+  /* On small screens, hide the menu when closed to avoid cramped UI */
+  .sidebar:not(.expanded) .menu-inner { display: none; }
+  .sidebar.expanded .menu-inner { display: flex; }
+}
+.home-btn.active {
+    background-color: #3bbf9a;
+    color: white;
+}
+
+.home-btn:active {
+    transform: scale(0.95);
+}
+#toggle:active {
+    transform: scale(0.9);
+}
+
+#toggle[aria-pressed="true"] {
+    background-color: #eef0e7;
+}
+
+/* ajout pour centrer les icon des boutons */
+
+.home-btn,
+.toggle {
+  display: flex;              /* active le flexbox */
+  align-items: center;        /* centre vertical */
+  justify-content: center;    /* centre horizontal */
+  width: 48px;                /* largeur du bouton */
+  height: 48px;               /* hauteur du bouton */
+  padding: 0;                 /* annule padding par défaut */
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+
+.home-btn img,
+.toggle img {
+  display: block;             /* retire l’espace inline qui décale */
+  max-width: 110%;             /* ajuste la taille de l’icône à l’intérieur */
+  max-height: 110%;
+}
+
+/* bouton non cliquable quand side bar fermée */
+
+/* Sidebar fermée : icônes visibles mais non cliquables */
+
+.sidebar:not(.expanded) .menu-inner a {
+  pointer-events: none; /* désactive les clics */
+}
+
+/* Sidebar ouverte : clic possible */
+.sidebar.expanded .menu-inner a {
+  pointer-events: auto;
+}
+
+/* =========================
+   Sidebar fixe
+   ========================= */
+.sidebar {
+  position: fixed;   /* fixe sur l’écran */
+  top: 0;
+  left: 0;
+  height: 100vh;     /* occupe toute la hauteur */
+  z-index: 1000;     /* au-dessus du contenu */
+  transition: width 0.35s ease, background-color 0.4s ease;
+}
+
+/* Ajustement du contenu pour ne pas être masqué par la sidebar */
+.content-wrap {
+  margin-left: 72px;           /* largeur sidebar fermée */
+  transition: margin-left 0.35s ease; /* animation lors de l’ouverture */
+}
+
+/* Quand la sidebar est ouverte */
+.sidebar.expanded ~ .content-wrap {
+  margin-left: 260px;          /* largeur sidebar ouverte */
+}
+
+#map {
+  width: 100%;
+  max-width: 100%;
+  height: 400px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(15,20,25,0.08);
+}
+
+/* =========================
+   Titre vertical / horizontal
+   ========================= */
+.sidebar-title {
+  font-weight: 700;
+  color: var(--muted-color);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  transition: all 0.2s ease;
+  margin-top: auto;
+  margin-bottom: 20px;
+  font-size: 15px;
+  opacity: 0.7;
+  margin-top: 20px;  /* au lieu de auto */
+  margin-bottom: 10px;
+}
+
+
+/* Quand la sidebar est ouverte → texte horizontal normal */
+.sidebar.expanded .sidebar-title {
+  writing-mode: horizontal-tb;
+  transform: rotate(360deg);
+  text-align: left;
+  padding-left: 12px;
+  font-size: 18px;
+  opacity: 1;
+}
+
+/* Logo site ressourcerie*/ 
+
+.logo-container {
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.logo-container img {
+    width: 200px; /* Ajuste selon la taille que tu veux */
+    height: auto;
+    opacity: 0.9;
+    transition: 0.2s ease-in-out;
+}
+
+.logo-container img:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+/* =========================
+   Logo site ressourcerie (bas sidebar)
+   ========================= */
+
+.logo-container {
+    margin-top: 40px;   
+    margin-bottom: 20px;           /* pousse le logo en bas */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0 10px 0;
+}
+
+.logo-container img {
+    width: 160px;                  /* tu peux augmenter/diminuer */
+    height: auto;
+    opacity: 0.9;
+    transition: 0.2s ease-in-out;
+    pointer-events: none;          /* non-cliquable = pas de bug */
+    user-select: none;             /* évite les highlights moches */
+}
+
+.sidebar.expanded .logo-container img {
+    width: 200px;                  /* logo plus grand quand ouvert */
+}
+
+.logo-container img:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.video-wrapper {
+  width: 100%;
+  height: 400px;         /* hauteur du cadre, modifiable */
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+.video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;     /* remplit parfaitement le cadre */
+  border-radius: 16px;
+}
